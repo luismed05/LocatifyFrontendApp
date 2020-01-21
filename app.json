@@ -24,7 +24,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
+      "bundleIdentifier": "com.test.locatify"
+    },
+    "description": "",
+    "android": {
+      "package": "com.test.locatify"
+    },
+    "githubUrl": "https://github.com/luismed05/LocatifyFrontendApp"
   }
 }
