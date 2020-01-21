@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Button, Text, TouchableOpacity, Alert } from 'react-native';
 import { ScreenOrientation } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons'
-import * as Font from 'expo-font';
+//import * as Font from 'expo-font';
 
 // import { Container } from './styles';
 
@@ -10,14 +10,14 @@ export default function Login({ navigation }) {
     const [username, setUsername] = useState('')
     const [senha, setSenha] = useState('')
 
-    useEffect(() => {
-        async function Loadfont() {
-            Font.loadAsync({
-                'open-sans-bold': require('../assets/Fonts/Gelasio-Bold.ttf'),
-            });
-        }
-        Loadfont();
-    }, [])
+    // useEffect(() => {
+    //     async function Loadfont() {
+    //         Font.loadAsync({
+    //             'open-sans-bold': require('../assets/Fonts/Gelasio-Bold.ttf'),
+    //         });
+    //     }
+    //     Loadfont();
+    // }, [])
 
 
     async function auth() {
@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
     texto: {
         fontSize: 24,
         marginBottom: 30,
-        fontFamily: 'gelasio-bold',
+        //fontFamily: 'gelasio-bold',
     }
 })
