@@ -2,17 +2,43 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, Button, Text, TouchableOpacity, Alert } from 'react-native';
 import { ScreenOrientation } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons'
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 
 // import { Container } from './styles';
 
 export default function Login({ navigation }) {
     const [username, setUsername] = useState('')
     const [senha, setSenha] = useState('')
+    const [posicao, setPosicao] = useState({});
+
+    useEffect(() => {
+        async function pegarPosicao() {
+            const { status } = await Permissions.askAsync(Permissions.LOCATION);
+            if (status === 'granted') {
+                const position = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+                setPosicao({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    latitudeDelta: 0.02,
+                    longitudeDelta: 0.02,
+                    posicao,
+                });
+            }
+        }
+        pegarPosicao();
+    }, [])
 
     async function auth() {
         if (username == 'luismed' && senha == '123') {
-            navigation.navigate('Map')
-            alert('sucesso','Seja bem vindo')
+            navigation.navigate('Map', 
+            { 
+                latitude: posicao.latitude,
+                longitude: posicao.longitude,
+                latitudeDelta: posicao.latitudeDelta,
+                longitudeDelta: posicao.longitudeDelta,
+            } )
+            alerta('sucesso','Seja bem vindo')
         } else {
             alerta('Erro', 'Usuario ou Senha invalidos');
         }
